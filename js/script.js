@@ -119,7 +119,24 @@ $(document).ready(function () {
   console.log(vegetables);
   console.log(users);
 
+  /* unione degli array */
+  const mergedArray = [...animals, ...vegetables, ...users];
+  
+  console.log(mergedArray);
 
+  /* stampa a schermo dell'array */
+  mergedArray.forEach((e, i) => {
+    const {name, color, prefix, family} = e;
+
+    $('#box-container').append(
+      `
+      <div class="box">
+        <i class="${family} ${prefix}${name}" style="color: ${color};"></i>
+        <p>${name.toUpperCase()}</p>
+      </div>
+      `
+      );
+  });
   
 
 });
