@@ -106,22 +106,14 @@ $(document).ready(function () {
   const colors = ['blue', 'orange', 'purple'];
   
   /* array filtrati in base al tipo */
-  let animals = icons.filter((e) => e.type == 'animal');
-  let vegetables = icons.filter((e) => e.type == 'vegetable');
-  let users = icons.filter((e) => e.type == 'user');
+  let animals = typeFilter(icons, 'animal');
+  let vegetables = typeFilter(icons, 'vegetable')
+  let users = typeFilter(icons, 'user');
   
   /* aggiunta della proprietà colore */
-  animals = animals.map((e) => {
-    return {...e, color: colors[0]}
-  })
-
-  vegetables = vegetables.map((e) => {
-    return {...e, color: colors[1]}
-  })
-
-  users = users.map((e) => {
-    return {...e, color: colors[2]}
-  })
+  animals = addColor(animals, colors[0]);
+  vegetables = addColor(vegetables, colors[1]);
+  users = addColor(users, colors[2]);
 
   console.log(animals);
   console.log(vegetables);
@@ -131,3 +123,16 @@ $(document).ready(function () {
   
 
 });
+
+/* funzioni */
+function typeFilter (array, value) {
+  const result = array.filter((e) => e.type == value);
+  return result;
+}
+
+function addColor (array, data) {
+  const result = array.map((e) => {
+    return {...e, color: data}
+  })
+  return result;
+}
