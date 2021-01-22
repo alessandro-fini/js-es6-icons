@@ -110,7 +110,7 @@ $(document).ready(function () {
   let vegetables = icons.filter((e) => e.type == 'vegetable');
   let users = icons.filter((e) => e.type == 'user');
   
-  /* aggiunta della proprietà colore in un array duplicato */
+  /* aggiunta della proprietà colore */
   animals = animals.map((e) => {
     return {...e, color: colors[0]}
   })
