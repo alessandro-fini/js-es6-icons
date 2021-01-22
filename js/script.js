@@ -5,7 +5,7 @@ Filtrare i risultati in base alla categoria (ricordate di svuotare il container)
 
 $(document).ready(function () {
 
-  const icons = [
+  let icons = [
     {
       name: 'cat',
       prefix: 'fa-',
@@ -120,12 +120,12 @@ $(document).ready(function () {
   console.log(users);
 
   /* unione degli array */
-  const mergedArray = [...animals, ...vegetables, ...users];
+  icons = [...animals, ...vegetables, ...users];
   
-  console.log(mergedArray);
+  console.log(icons);
 
   /* stampa a schermo dell'array */
-  mergedArray.forEach((e, i) => {
+  icons.forEach((e, i) => {
     const {name, color, prefix, family} = e;
 
     $('#box-container').append(
@@ -134,6 +134,23 @@ $(document).ready(function () {
         <i class="${family} ${prefix}${name}" style="color: ${color};"></i>
         <p>${name.toUpperCase()}</p>
       </div>
+      `
+      );
+  });
+
+  /* inserimento delle option nella select */
+  const typeArray = [];
+
+  icons.forEach((e) => {
+    if (!typeArray.includes(e.type)) {
+      typeArray.push(e.type);
+    }
+  });
+  
+  typeArray.forEach((e) => {
+    $('#select-type').append(
+      `
+      <option value="${e}">${e}</option>
       `
       );
   });
