@@ -125,18 +125,7 @@ $(document).ready(function () {
   console.log(icons);
 
   /* stampa a schermo dell'array */
-  icons.forEach((e, i) => {
-    const {name, color, prefix, family} = e;
-
-    $('#box-container').append(
-      `
-      <div class="box">
-        <i class="${family} ${prefix}${name}" style="color: ${color};"></i>
-        <p>${name.toUpperCase()}</p>
-      </div>
-      `
-      );
-  });
+  iconsToPrint(icons, '#box-container');
 
   /* inserimento delle option nella select */
   const typeArray = [];
@@ -146,15 +135,24 @@ $(document).ready(function () {
       typeArray.push(e.type);
     }
   });
-  
-  typeArray.forEach((e) => {
-    $('#select-type').append(
-      `
-      <option value="${e}">${e}</option>
-      `
-      );
+
+  optionsToPrint(typeArray, '#select-type');
+
+  /* acquisizione del valore della select */
+  $('#select-type').change(function () { 
+    const selected = $(this).val();
+    console.log(selected); 
+    
+    if (selected == typeArray[0]) { /* selected == 'animal' */
+      iconsToPrint(animals, '#box-container');
+    } else if (selected == typeArray[1]) { /* selected == 'vegetable' */
+      iconsToPrint(vegetables, '#box-container');
+    } else if (selected == typeArray[2]) { /* selected == 'user' */
+      iconsToPrint(users, '#box-container');
+    } else { /* selected == 'all' */
+      iconsToPrint(icons, '#box-container');
+    }
   });
-  
 
 });
 
@@ -169,4 +167,33 @@ function addColor (array, data) {
     return {...e, color: data}
   })
   return result;
+}
+
+function iconsToPrint (array, id) {
+  /* svuotare il container */
+  $(id).html('');
+  /* / */
+
+  array.forEach((e, i) => {
+    const {name, color, prefix, family} = e;
+
+    $(id).append(
+      `
+      <div class="box">
+        <i class="${family} ${prefix}${name}" style="color: ${color};"></i>
+        <p>${name.toUpperCase()}</p>
+      </div>
+      `
+      );
+  });
+}
+
+function optionsToPrint (array, id) {
+  array.forEach((e) => {
+    $(id).append(
+      `
+      <option value="${e}">${e}</option>
+      `
+      );
+  });
 }
